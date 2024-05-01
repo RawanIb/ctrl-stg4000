@@ -43,10 +43,11 @@ from stg._wrapper.mock import info as mockinfo
 # ------------------------------------------------------------------------------
 def available() -> List[DeviceInfo]:
     "list all available MCS STGs connected over USB with this PC"
-    deviceList = CMcsUsbListNet()
-    deviceList.Initialize(DeviceEnumNet.MCS_STG_DEVICE)
+    deviceList = CMcsUsbListNet(DeviceEnumNet.MCS_DEVICE_USB)
+    print("found %d devices" % (deviceList.Count))
+
     devices = []
-    for dev_num in range(0, deviceList.GetNumberOfDevices()):
+    for dev_num in range(deviceList.Count):
         devices.append(deviceList.GetUsbListEntry(dev_num))
     return devices
 
@@ -180,7 +181,7 @@ class STGX(ABC):
         self._name = self._info.DeviceName
         self._manufacturer = self._info.Manufacturer
         with self.interface() as interface:
-            _, soft, hard = interface.GetStgVersionInfo("", "")
+            soft, hard = interface.GetStgVersionInfo("", "")
             self._version = (soft, hard)
             self._serial_number = int(self._info.SerialNumber)
             self._crinua = (

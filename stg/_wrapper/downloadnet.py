@@ -169,8 +169,8 @@ class STG4000(STGX):
         if len(amplitudes_in_mA) != len(durations_in_ms):
             raise ValueError("Every amplitude needs a duration and vice versa!")
 
-        amplitudes = [System.Int32(a * 1000_000) for a in amplitudes_in_mA]
-        durations = [System.UInt64(s * 1000) for s in durations_in_ms]
+        amplitudes = [System.Int32(int(a * 1000_000)) for a in amplitudes_in_mA]
+        durations = [System.UInt64(int(s * 1000)) for s in durations_in_ms]
 
         MODE = self.set_mode([channel_index], mode)
         with self.interface() as interface:

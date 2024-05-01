@@ -10,6 +10,8 @@ pip install -e .
 #download and install the dll from mulitchannelsystems
 python -m stg.install
 ```
+> Changes bellow are for STG5, if you are using STG4 you can skip them.
+If the changes were made once, you can skip bellow steps and run third and fourth commands from the above code snippet.
 
 ### Chnages in order to make it work for STG5:
 (Files after changes attached)
